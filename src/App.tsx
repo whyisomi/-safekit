@@ -373,7 +373,7 @@ function App() {
     <div
       style={{
         minHeight: '100vh',
-        background: '#f8fafc',
+        background: '#F5F1E8',
         color: '#1e293b',
         fontFamily: 'system-ui, sans-serif',
       }}
