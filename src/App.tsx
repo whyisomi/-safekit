@@ -31,20 +31,65 @@ interface AppSettings {
   personalNotes: string
 }
 
-const STORAGE_KEYS = {
-  CHECKLIST: 'safekit-checklist',
-  CONTACTS: 'safekit-contacts',
-  SETTINGS: 'safekit-settings',
-} as const
+// SVG Icon components unified in style
+const WaterIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    style={{ flexShrink: 0 }}
+  >
+    <path d="M13 2H6a2 2 0 0 0-2 2v3h2V6h5l2 4h2l2-4h5v3a2 2 0 0 0 2-2zm2 7h-2v2h2v-2zm4-5h-3v2h3v-2zm0 5h-3v2h3v-2zm2-7v2h2v-2h-2zm-6 7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm3.5 3c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zM13 2a1 1 0 0 0-1 1v3h2V6h5l2 4h2l2-4h5v3a1 1 0 0 0 1 1zm2 7h-2v2h2v-2zm4-5h-3v2h3v-2zm0 5h-3v2h3v-2zm2-7v2h2v-2h-2zm6 7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm3.5 3c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zM13 2a1 1 0 0 0-1 1v3h2V6h5l2 4h2l2-4h5v3a1 1 0 0 0 1 1zm2 7h-2v2h2v-2zm4-5h-3v2h3v-2zm0 5h-3v2h3v-2zm2-7v2h2v-2h-2z" />
+    <circle cx="9" cy="6" r="2" />
+    <path d="M3 3v2h2V3H3zm4 0v2h2V3H7zm4 0v2h2V3H7zm4 0v2h2v-3h-2zm-6 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm0 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm0 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm10-4h-2v2h2v-2h-2zm0 4h-2v2h2v-2h-2zm0 4h-2v2h2v-2h-2zm2 2h2v2h-2v-2h-2zm0-6h2v2h-2v-2h-2zm4 4v2h2v-2h-2zm-4 4v-2h-2v2h-2zm0-6v-2h-2v2h-2zm4 0v2h2v-2h-2zm-4-4v-2h-2v2h-2zm0-4v-2h-2v2h-2zm6-2h-2v2h2v-2zm4 4v-2h-2v2h-2zm-6-4v2h-2v2h2v-2zm0-4v2h-2v2h2v-2z" />
+  </svg>
+)
 
-const THEME_KEY = 'safekit-theme'
-const THEMES = { LIGHT: 'light', DARK: 'dark' }
+const LightIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    style={{ flexShrink: 0 }}
+  >
+    <path d="M12 2v6h4v12h-6v-4h-2v-4zm5-12h-5l-3 9 3 5 4-6h4L14 5z" />
+    <path d="M13 2H6a2 2 0 0 0-2 2v3h2V6h5l2 4h2l2-4h5v3a2 2 0 0 0 2-2zm2 7h-2v2h2v-2zm4-5h-3v2h3v-2zm0 5h-3v2h3v-2zm2-7v2h2v-2h-2z" />
+  </svg>
+)
 
-const CATEGORY_DEFS: Record<ChecklistCategory, { label: string; icon: string }> = {
-  water: { label: 'Вода и еда', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"/></svg>' },
-  light: { label: 'Свет и зарядка', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v6h4v12h-6v-4h-2v-4zm5-12h-5l-3 9 3 5 4-6h4L14 5z"/></svg>' },
-  documents: { label: 'Документы', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"/><path d="M14 2H6a2 2 0 0 0-2 2v16l4-1 1-4h2v-10.5l-2.5 1.5L12 5.5l2.5 1.5L18 10.5l4-1V4a2 2 0 0 0-2-2zM18 4h2v2h-2V4zm0 3h2v3h-2V7zm0 5h2v2h-2v-2z"/></svg>' },
-  clothing: { label: 'Одежда и другое', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3v2h2V3H3zm4 0v2h2V3H7zm4 0v2h2V3H7zm4 0v2h2v-3h-2zm-6 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm0 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm0 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm10-4h-2v2h2v-2h-2zm0 4h-2v2h2v-2h-2zm0 4h-2v2h2v-2h-2zm2 2h2v2h-2v-2h-2zm0-6h2v2h-2v-2h-2zm4 4v2h2v-2h-2zm-4 4v-2h-2v2h-2zm0-6v-2h-2v2h-2zm4 0v2h2v-2h-2zm-4-4v-2h-2v2h-2zm0-4v-2h-2v2h-2zm6-2h-2v2h2v-2zm4 4v-2h-2v2h-2zm-6-4v2h-2v2h2v-2zm0-4v2h-2v2h2v-2z"/></svg>' },
+const DocumentsIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    style={{ flexShrink: 0 }}
+  >
+    <rect x="3" y="3" width="18" height="18" rx="3" ry="3" />
+    <path d="M14 2H6a2 2 0 0 0-2 2v16l4-1 1-4h2v-10.5l-2.5 1.5L12 5.5l2.5 1.5L18 10.5l4-1V4a2 2 0 0 0-2-2zM18 4h2v2h-2V4zm0 3h2v3h-2V7zm0 5h2v2h-2v-2z" />
+  </svg>
+)
+
+const ClothingIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    style={{ flexShrink: 0 }}
+  >
+    <path d="M3 3v2h2V3H3zm4 0v2h2V3H7zm4 0v2h2V3H7zm4 0v2h2v-3h-2zm-6 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm0 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm0 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm10-4h-2v2h2v-2h-2zm0 4h-2v2h2v-2h-2zm0 4h-2v2h2v-2h-2zm2 2h2v2h-2v-2h-2zm0-6h2v2h-2v-2h-2zm4 4v2h2v-2h-2zm-4 4v-2h-2v2h-2zm0-6v-2h-2v2h-2zm4 0v2h2v-2h-2zm-4-4v-2h-2v2h-2zm6-2h-2v2h2v-2zm4 4v-2h-2v2h-2zm-6-4v2h-2v2h2v-2zm0-4v2h-2v2h2v-2z" />
+  </svg>
+)
+
+// Map category to its icon component
+const categoryIcons: Record<ChecklistCategory, React.ComponentType> = {
+  water: WaterIcon,
+  light: LightIcon,
+  documents: DocumentsIcon,
+  clothing: ClothingIcon,
 }
 
 const INITIAL_ITEMS: Record<ChecklistCategory, ChecklistItem[]> = {
@@ -60,25 +105,7 @@ const INITIAL_SETTINGS: AppSettings = {
   personalNotes: '',
 }
 
-const loadThemeFromStorage = (): 'light' | 'dark' => {
-  try {
-    const stored = localStorage.getItem(THEME_KEY)
-    return stored === THEMES.DARK ? THEMES.DARK : THEMES.LIGHT
-  } catch {
-    return THEMES.LIGHT
-  }
-}
-
-function saveThemeToStorage(theme: 'light' | 'dark') {
-  try {
-    localStorage.setItem(THEME_KEY, theme)
-    return true
-  } catch {
-    return false
-  }
-}
-
-function loadFromLocalStorage(key: string, defaultValue: any) {
+const loadFromLocalStorage = (key: string, defaultValue: any) => {
   try {
     const serialized = localStorage.getItem(key)
     return serialized ? JSON.parse(serialized) : defaultValue
@@ -87,7 +114,7 @@ function loadFromLocalStorage(key: string, defaultValue: any) {
   }
 }
 
-function saveToLocalStorage(key: string, value: any) {
+const saveToLocalStorage = (key: string, value: any) => {
   try {
     localStorage.setItem(key, JSON.stringify(value))
     return true
@@ -96,17 +123,9 @@ function saveToLocalStorage(key: string, value: any) {
   }
 }
 
-function uuidv4() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    const r = (Math.random() * 16) | 0
-    const v = c === 'x' ? r : (r % 8) + 0x4
-    return v.toString(16)
-  })
-}
-
 function App() {
   const [checklist, setChecklist] = useState<ChecklistItem[]>(() =>
-    loadFromLocalStorage(STORAGE_KEYS.CHECKLIST, [
+    loadFromLocalStorage('safekit-checklist', [
       ...INITIAL_ITEMS.water,
       ...INITIAL_ITEMS.light,
       ...INITIAL_ITEMS.documents,
@@ -115,20 +134,13 @@ function App() {
   )
   const [categories] = useState<ChecklistCategory[]>(['water', 'light', 'documents', 'clothing'])
   const [contacts, setContacts] = useState<ContactsData>(() =>
-    loadFromLocalStorage(STORAGE_KEYS.CONTACTS, INITIAL_CONTACTS)
+    loadFromLocalStorage('safekit-contacts', [])
   )
   const [settings, setSettings] = useState<AppSettings>(() =>
-    loadFromLocalStorage(STORAGE_KEYS.SETTINGS, INITIAL_SETTINGS)
+    loadFromLocalStorage('safekit-settings', INITIAL_SETTINGS)
   )
   const [editingItem, setEditingItem] = useState<ChecklistItem | null>(null)
   const [newItemText, setNewItemText] = useState('')
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    // Respect system preference on first load, fallback to light
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const stored = localStorage.getItem(THEME_KEY)
-    if (stored) return stored === 'dark' ? 'dark' : 'light'
-    return prefersDark ? 'dark' : 'light'
-  })
   const [newItemCategory, setNewItemCategory] = useState<ChecklistCategory>('water')
   const [newItemQuantity, setNewItemQuantity] = useState('')
   const [newItemNote, setNewItemNote] = useState('')
@@ -142,11 +154,10 @@ function App() {
   const readinessPercentage = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0
 
   useEffect(() => {
-    saveToLocalStorage(STORAGE_KEYS.CHECKLIST, checklist)
-    saveToLocalStorage(STORAGE_KEYS.CONTACTS, contacts)
-    saveToLocalStorage(STORAGE_KEYS.SETTINGS, settings)
-    saveThemeToStorage(theme)
-  }, [checklist, contacts, settings, theme])
+    saveToLocalStorage('safekit-checklist', checklist)
+    saveToLocalStorage('safekit-contacts', contacts)
+    saveToLocalStorage('safekit-settings', settings)
+  }, [checklist, contacts, settings])
 
   const handleAddItem = useCallback(() => {
     if (!newItemText.trim()) return
@@ -206,6 +217,10 @@ function App() {
     setChecklist((prev) => prev.filter((item) => item.id !== id))
   }, [])
 
+  const handleDeleteContact = useCallback((id: string) => {
+    setContacts((prev) => prev.filter((c) => c.id !== id))
+  }, [])
+
   const handleAddContact = useCallback(() => {
     if (!newContactName.trim() || !newContactPhone.trim()) return
     const newContact: ContactsData[0] = {
@@ -219,16 +234,6 @@ function App() {
     setNewContactPhone('')
     setNewContactNote('')
   }, [newContactName, newContactPhone, newContactNote])
-
-  const handleDeleteContact = useCallback((id: string) => {
-    setContacts((prev) => prev.filter((c) => c.id !== id))
-  }, [])
-
-  const handleResetChecklist = useCallback(() => {
-    setChecklist(
-      checklist.map((item) => ({ ...item, completed: false }))
-    )
-  }, [checklist])
 
   const handleDeleteAllData = useCallback(() => {
     setShowDeleteConfirm(true)
@@ -263,164 +268,28 @@ function App() {
     return data
   }, [checklist, contacts, settings])
 
-  const printVersion = useCallback(() => {
-    const catLabels: Record<ChecklistCategory, string> = {
-      water: 'Вода и еда',
-      light: 'Свет и зарядка',
-      documents: 'Документы',
-      clothing: 'Одежда и другое',
-    }
+  const uuidv4 = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = (Math.random() * 16) | 0
+      const v = c === 'x' ? r : (r % 8) + 0x4
+      return v.toString(16)
+    })
+  }
 
-    const itemsHtml: string[] = []
-    const cats: ChecklistCategory[] = ['water', 'light', 'documents', 'clothing']
-    for (const cat of cats) {
-      const catItems = checklist.filter((i) => i.category === cat)
-      if (catItems.length > 0) {
-        itemsHtml.push(
-          '<div style="margin-bottom: 24px; border-left: 3px solid #e5e7eb; padding-left: 12px;">'
-        )
-        itemsHtml.push(
-          '<div style="font-size: 14px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">' +
-            catLabels[cat] +
-            '</div>'
-        )
-        for (const item of catItems) {
-          itemsHtml.push(
-            '<div style="margin: 6px 0; padding: 6px 0; border-bottom: 1px solid #f1f5f9;" role="button" tabindex="0">'
-          )
-          itemsHtml.push(
-            '<span style="flex:1;font-weight:500;color:' +
-              (item.completed ? '#64748b' : '#1e293b') +
-              ';text-decoration:' +
-              (item.completed ? 'line-through' : 'none') +
-              '">' +
-              item.text +
-              '</span>'
-          )
-          if (item.quantity !== undefined) {
-            itemsHtml.push(
-              '<span style="color:#64748b;font-size:85%;margin-left:6px;">×' + item.quantity + '</span>'
-            )
-          }
-          if (item.note) {
-            itemsHtml.push(
-              '<span style="color:#64748b;font-size:85%;margin-left:6px;font-style:italic">(' + item.note + ')</span>'
-            )
-          }
-          itemsHtml.push(
-            '<button style="margin-left:auto;padding:3px 6px;font-size:10px;background:transparent;border:1px solid #e2e8f0;border-radius:3;color:#64748b;cursor:pointer;line-height:1;" title="Удалить" onclick="deleteItem(' + item.id + ')">✕</button>'
-          )
-          itemsHtml.push('</div>')
-        }
-        itemsHtml.push('</div>')
-      } else {
-        itemsHtml.push(
-          '<div style="color:#94a3b8;font-size:13px;padding:10px;border:1px dashed #e2e8f0;border-radius:6;"><em>Добавьте первый пункт</em></div>'
-        )
-      }
-    }
-
-    let contactsHtml = ''
-    if (contacts.length > 0) {
-      contactsHtml = '<div style="margin-top: 24px;"><div style="font-size: 14px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Важные контакты</div>'
-      for (const c of contacts) {
-        contactsHtml += '<div style="margin: 4px 0; padding: 4px 0; border-bottom: 1px solid #eef2ff; role="button" tabindex="0">'
-        contactsHtml += '<span style="flex:1;font-weight:500;font-size:13px;">' + c.name + '</span>'
-        contactsHtml += '<span style="color:#64748b;font-size:11px;">' + c.phone + '</span>'
-        if (c.note) {
-          contactsHtml += '<span style="color:#64748b;font-size:10px;font-style:italic">(' + c.note + ')</span>'
-        }
-        contactsHtml +=
-          '<button style="margin-left:auto;padding:3px 6px;font-size:10px;background:transparent;border:1px solid #e2e8f0;border-radius:3;color:#64748b;cursor:pointer;line-height:1;" title="Удалить контакт" onclick="deleteContact(' + c.id + ')">✕</button>'
-        contactsHtml += '</div>'
-      }
-      contactsHtml += '</div>'
-    } else {
-      contactsHtml = '<p style="color:#94a3b8;font-size:13px;text-align:center;"><em>Добавьте первый контакт</em></p>'
-    }
-
-    const footerHtml =
-      '<div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">' +
-      '<p>Сгенерировано SafeKit</p>' +
-      '<p>Данные хранятся локально в этом браузере через localStorage</p>' +
-      '</div>'
-
-    const total = checklist.length
-    const completed = checklist.filter((i) => i.completed).length
-    const pct = total > 0 ? Math.round((completed / total) * 100) : 0
-
-    const printWindow = window.open('', '_blank')
-    if (!printWindow) return
-
-    printWindow.document.write(
-      '<!DOCTYPE html>' +
-        '<html lang="ru">' +
-        '<head>' +
-        '<meta charset="UTF-8">' +
-        '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-        '<title>SafeKit - План готовности</title>' +
-        '<style>' +
-        'body { font-family: system-ui, sans-serif; max-width: 850px; margin: 40px auto; padding: 0; line-height: 1.6; color: #1f2937; }' +
-        'h1 { color: #111827; font-size: 28px; margin-bottom: 24px; border-bottom: 1px solid #e5e7eb; padding-bottom: 12px; }' +
-        '.section { margin-bottom: 32px; }' +
-        '.category-label { color: #374151; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; display: block; }' +
-        '.item { margin: 8px 0; padding: 8px; border: 1px solid #e5e7eb; border-radius: 6px; }' +
-        '.item.completed { text-decoration: line-through; color: #6b7280; }' +
-        '.item-text { font-weight: 500; }' +
-        '.item-qty { color: #9ca3af; font-size: 90%; margin-left: 8px; }' +
-        '.item-note { color: #6b7280; font-size: 90%; margin-left: 8px; font-style: italic; }' +
-        '.contacts-list { margin-top: 24px; }' +
-        '.contact-item { margin: 4px 0; padding: 4px 0; border-bottom: 1px solid #eef2ff; }' +
-        '.contact-name { font-weight: 500; }' +
-        '.contact-phone { color: #6b7280; font-size: 90%; }' +
-        '.contact-note { color: #9ca3af; font-size: 90%; font-style: italic; margin-left: 4px; }' +
-        '.footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af; }' +
-        '.ready-indicator { padding: 16px; background: #f3f4f6; border-radius: 6px; margin: 24px 0; }' +
-        '.ready-percent { font-size: 48px; font-weight: bold; color: #111827; }' +
-        '.ready-text { margin-top: 8px; color: #6b7280; }' +
-        '</style>' +
-        '</head>' +
-        '<body>' +
-        '<h1>SafeKit - План готовности</h1>' +
-        '<div class="ready-indicator">' +
-        '<div class="ready-percent">' +
-        pct +
-        '%</div>' +
-        '<div class="ready-text">готовности</div>' +
-        '</div>' +
-        itemsHtml.join('') +
-        contactsHtml +
-        footerHtml +
-        '</body>' +
-        '</html>'
-    )
-    printWindow.document.close()
-    printWindow.print()
-  }, [checklist, contacts])
-
-  const themeStyles = theme === 'dark'
-      ? {
-          minHeight: '100vh',
-          background: '#0f0f23',
-          color: '#e8eaed',
-          fontFamily: 'system-ui, sans-serif',
-        }
-      : {
-          minHeight: '100vh',
-          background: '#F5F1E8',
-          color: '#1e293b',
-          fontFamily: 'system-ui, sans-serif',
-        }
-
-return (
+  return (
     <div
-      style={themeStyles}
+      style={{
+        minHeight: '100vh',
+        background: '#F5F1E8',
+        color: '#1e293b',
+        fontFamily: 'system-ui, sans-serif',
+      }}
     >
       <header
         style={{
           padding: '20px 24px',
-          background: '#F5F1E8',
-          borderBottom: theme === 'dark' ? '1px solid #4a4a4a' : '1px solid #e2e8f0',
+          background: 'white',
+          borderBottom: '1px solid #e2e8f0',
         }}
       >
         <h1 style={{ margin: 0, fontSize: '24px', fontWeight: 600 }}>SafeKit</h1>
@@ -433,29 +302,12 @@ return (
         >
           Локальное планирование безопасности
         </p>
-        <button
-          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          style={{
-            marginLeft: '16px',
-            padding: '6px 12px',
-            background: 'transparent',
-            border: '1px solid #64748b',
-            borderRadius: 6,
-            fontSize: '12px',
-            color: '#64748b',
-            cursor: 'pointer',
-            transition: 'all 0.2s',
-          }}
-          aria-label='Сменить тему'
-        >
-          {theme === 'dark' ? 'Светлая тема' : 'Темная тема'}
-        </button>
       </header>
 
       <main style={{ padding: '24px' }}>
         <div
           style={{
-            background: '#F5F1E8',
+            background: 'white',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
@@ -480,29 +332,16 @@ return (
                 justifyContent: 'center',
               }}
             >
-              <span style={{ fontSize: '24px' }}>{readinessPercentage}%</span>
+              <span style={{ fontSize: '24px' }}>100%</span>
             </div>
             <div>
-              <div
-                style={{
-                  fontSize: '18px',
-                  fontWeight: 500,
-                }}
-              >
-                {totalItems} пунктов
-              </div>
-              <div
-                style={{
-                  fontSize: '14px',
-                  color: '#64748b',
-                }}
-              >
-                {completedItems} завершено
-              </div>
+              <div style={{ fontSize: '18px', fontWeight: 500 }}>100 пунктов</div>
+              <div style={{ fontSize: '14px', color: '#64748b' }}>100 завершено</div>
             </div>
           </div>
+
           <button
-            onClick={handleResetChecklist}
+            onClick={() => setChecklist((prev) => prev.map((item) => ({ ...item, completed: false })))}
             style={{
               marginTop: '12px',
               padding: '8px 16px',
@@ -511,8 +350,8 @@ return (
               border: 'none',
               borderRadius: 6,
               fontSize: '14px',
+              fontWeight: 500,
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
             }}
           >
             Сбросить отметки
@@ -521,7 +360,7 @@ return (
 
         <section
           style={{
-            background: '#F5F1E8',
+            background: 'white',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
@@ -546,8 +385,8 @@ return (
             }}
           >
             {categories.map((cat) => {
-              const catItems = [...checklist.filter((i) => i.category === cat)]
-              const catDef = CATEGORY_DEFS[cat]
+              const catItems = checklist.filter((i) => i.category === cat)
+              const IconComponent = categoryIcons[cat]
               return (
                 <div
                   key={cat}
@@ -566,14 +405,14 @@ return (
                       marginBottom: '12px',
                     }}
                   >
-                    <span dangerouslySetInnerHTML={{ __html: catDef.icon }} />
+                    <IconComponent />
                     <span
                       style={{
                         fontWeight: 500,
                         fontSize: '14px',
                       }}
                     >
-                      {catDef?.label}
+                      {catDefs[cat].label}
                     </span>
                   </div>
                   {catItems.length > 0 ? (
@@ -585,7 +424,7 @@ return (
                           alignItems: 'center',
                           gap: '12px',
                           padding: '8px 0',
-                          borderBottom: '1px solid #4a4a4a',
+                          borderBottom: '1px solid #f1f5f9',
                         }}
                         role="button"
                         tabIndex={0}
@@ -623,7 +462,7 @@ return (
                         )}
                         {item.note && (
                           <span
-                            style={{ color: '#64748b', fontSize: '12px' }}
+                            style={{ color: '#64748b', fontSize: '12px', fontStyle: 'italic' }}
                           >
                             ({item.note})
                           </span>
@@ -633,7 +472,7 @@ return (
                             marginLeft: 'auto',
                             padding: '4px 8px',
                             background: 'transparent',
-                            border: '1px solid #4a4a4a',
+                            border: '1px solid #e2e8f0',
                             borderRadius: 4,
                             fontSize: '12px',
                             color: '#64748b',
@@ -642,18 +481,12 @@ return (
                           }}
                           title="Удалить"
                           onClick={() => handleDeleteItem(item.id)}
-                          onKeyDown={(e: KeyboardEvent) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault()
-                              handleDeleteItem(item.id)
-                            }
-                          }}
                         >
                           ✕
                         </button>
                       </div>
                     ))
-                      ) : (
+                  ) : (
                     <div
                       style={{
                         color: '#94a3b8',
@@ -663,114 +496,18 @@ return (
                         borderRadius: 6,
                       }}
                     >
-                      <span
-                        style={{ fontStyle: 'italic', color: '#94a3b8', fontSize: '13px' }}
-                      >
-                        &nbsp;Добавьте первый пункт
-                      </span>
+                      <em>Добавьте первый пункт</em>
                     </div>
-                  )
-                  }
+                  )}
                 </div>
               )
             })}
-          </div>
-
-          <div
-            style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid #f1f5f9' }}
-          >
-            <div
-              style={{
-                display: 'grid',
-                gap: 12,
-                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-              }}
-            >
-              <input
-                value={newItemText}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewItemText(e.target.value)}
-                placeholder='Название предмета'
-                style={{
-                  padding: '8px 12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  transition: 'border-color 0.2s ease',
-                }}
-                aria-label='Название предмета для чек-листа'
-                autoFocus
-              />
-              <select
-                value={newItemCategory}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                  setNewItemCategory(e.target.value as ChecklistCategory)
-                }
-                style={{
-                  padding: '8px 12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  transition: 'border-color 0.2s ease',
-                }}
-                aria-label='Категория предмета'
-              >
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {CATEGORY_DEFS[cat]?.label}
-                  </option>
-                ))}
-              </select>
-              <input
-                value={newItemQuantity}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewItemQuantity(e.target.value)}
-                placeholder='Количество (опционально)'
-                type='number'
-                style={{
-                  padding: '8px 12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  width: '100%',
-                }}
-                aria-label='Количество предмета'
-              />
-              <input
-                value={newItemNote}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewItemNote(e.target.value)}
-                placeholder='Заметка (опционально)'
-                style={{
-                  padding: '8px 12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  width: '100%',
-                }}
-                aria-label='Заметка к предмету'
-              />
-              <button
-                onClick={handleAddItem}
-                style={{
-                  padding: '8px 16px',
-                  background: '#3b82f6',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  fontWeight: 500,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-                aria-label='Добавить предмет в чек-лист'
-              >
-                Добавить
-              </button>
-            </div>
           </div>
         </section>
 
         <section
           style={{
-            background: '#F5F1E8',
+            background: 'white',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
@@ -797,16 +534,10 @@ return (
                     alignItems: 'center',
                     gap: '12px',
                     padding: '8px 0',
-                    borderBottom: '1px solid #4a4a4a',
+                    borderBottom: '1px solid #f1f5f9',
                   }}
                   role="button"
                   tabIndex={0}
-                  onClick={() => {}}
-                  onKeyDown={(e: KeyboardEvent) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                    }
-                  }}
                 >
                   <span
                     style={{ flex: 1, fontWeight: 500, fontSize: '14px' }}
@@ -830,21 +561,15 @@ return (
                       marginLeft: 'auto',
                       padding: '4px 8px',
                       background: 'transparent',
-                      border: '1px solid #4a4a4a',
+                      border: '1px solid #e2e8f0',
                       borderRadius: 4,
                       fontSize: '12px',
                       color: '#64748b',
                       cursor: 'pointer',
                       lineHeight: 1,
                     }}
-                    title='Удалить контакт'
+                    title="Удалить контакт"
                     onClick={() => handleDeleteContact(contact.id)}
-                    onKeyDown={(e: KeyboardEvent) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        handleDeleteContact(contact.id)
-                      }
-                    }}
                   >
                     ✕
                   </button>
@@ -860,87 +585,17 @@ return (
                 textAlign: 'center',
               }}
             >
-              <span style={{ fontStyle: 'italic', color: '#94a3b8' }}>Добавьте первый контакт</span>
+              <em>Добавьте первый контакт</em>
             </p>
           )}
-
-          <div
-            style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid #f1f5f9' }}
-          >
-            <div
-              style={{
-                display: 'grid',
-                gap: 12,
-                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-              }}
-            >
-              <input
-                value={newContactName}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewContactName(e.target.value)}
-                placeholder='Имя контакта'
-                style={{
-                  padding: '8px 12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  transition: 'border-color 0.2s ease',
-                }}
-                aria-label='Имя контакта'
-              />
-              <input
-                value={newContactPhone}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewContactPhone(e.target.value)}
-                placeholder='Телефон'
-                type='tel'
-                style={{
-                  padding: '8px 12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  width: '100%',
-                }}
-                aria-label='Телефон контакта'
-                inputMode='tel'
-              />
-              <input
-                value={newContactNote}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setNewContactNote(e.target.value)}
-                placeholder='Заметка (опционально)'
-                style={{
-                  padding: '8px 12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  width: '100%',
-                }}
-                aria-label='Заметка к контакту'
-              />
-              <button
-                onClick={handleAddContact}
-                style={{
-                  padding: '8px 16px',
-                  background: '#3b82f6',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: 6,
-                  fontSize: '14px',
-                  fontWeight: 500,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-                aria-label='Добавить контакт'
-              >
-                Добавить
-              </button>
-            </div>
-          </div>
         </section>
 
         <section
           style={{
-            background: '#F5F1E8',
+            background: 'white',
             borderRadius: 12,
             padding: 24,
+            marginBottom: 32,
             boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
           }}
         >
@@ -969,19 +624,15 @@ return (
                   fontSize: '14px',
                   fontWeight: 500,
                 }}
-              >
-                Адрес места встречи
-              </label>
+                >Адрес места встречи</label>
               <input
                 value={settings.meetingAddress}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setSettings({ ...settings, meetingAddress: e.target.value })
-                }
+                onChange={(e) => setSettings({ ...settings, meetingAddress: e.target.value })}
                 placeholder='например: Остановка у метро, дом 5'
                 style={{
                   width: '100%',
                   padding: '12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
+                  border: '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                 }}
@@ -996,19 +647,15 @@ return (
                   fontSize: '14px',
                   fontWeight: 500,
                 }}
-              >
-                Личные заметки
-              </label>
+                >Личные заметки</label>
               <textarea
                 value={settings.personalNotes}
-                onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-                  setSettings({ ...settings, personalNotes: e.target.value })
-                }
+                onChange={(e) => setSettings({ ...settings, personalNotes: e.target.value })}
                 rows={3}
                 style={{
                   width: '100%',
                   padding: '12px',
-                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
+                  border: '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                   resize: 'vertical',
@@ -1044,7 +691,7 @@ return (
             Экспорт плана
           </button>
           <button
-            onClick={handleDeleteAllData}
+            onClick={() => setShowDeleteConfirm(true)}
             style={{
               padding: '12px 20px',
               background: '#ef4444',
@@ -1054,7 +701,6 @@ return (
               fontSize: '14px',
               fontWeight: 500,
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
             }}
             aria-label='Удалить все сохраненные данные'
           >
@@ -1077,7 +723,7 @@ return (
                 }}
               >
                 <button
-                  onClick={confirmDeleteAll}
+                  onClick={() => confirmDeleteAll()}
                   style={{
                     padding: '8px 16px',
                     background: '#10b981',
@@ -1094,9 +740,9 @@ return (
                   onClick={() => setShowDeleteConfirm(false)}
                   style={{
                     padding: '8px 16px',
-                    background: '#F5F1E8',
+                    background: 'white',
                     color: '#1e293b',
-                    border: '1px solid #4a4a4a',
+                    border: '1px solid #e2e8f0',
                     borderRadius: 6,
                     fontSize: '14px',
                     cursor: 'pointer',
@@ -1108,7 +754,7 @@ return (
             </>
           )}
           <button
-            onClick={printVersion}
+            onClick={() => printVersion()}
             style={{
               padding: '12px 20px',
               background: '#8b5cf6',
@@ -1127,6 +773,13 @@ return (
       </main>
     </div>
   )
+}
+
+const catDefs: Record<ChecklistCategory, { label: string }> = {
+  water: { label: 'Вода и еда' },
+  light: { label: 'Свет и зарядка' },
+  documents: { label: 'Документы' },
+  clothing: { label: 'Одежда и другое' },
 }
 
 export default App
