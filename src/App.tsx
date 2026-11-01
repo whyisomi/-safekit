@@ -91,6 +91,14 @@ const categoryEmoji: Record<ChecklistCategory, string> = {
   clothing: '👕',
 }
 
+const contactEmoji: Record<string, string> = {
+  'water': '💧',
+  'light': '🔦',
+  'documents': '📄',
+  'clothing': '👕',
+  default: '👤',
+}
+
 const INITIAL_ITEMS: Record<ChecklistCategory, ChecklistItem[]> = {
   water: [],
   light: [],
@@ -139,6 +147,7 @@ function App() {
     loadFromLocalStorage('safekit-settings', INITIAL_SETTINGS)
   )
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [sortContacts, setSortContacts] = useState<'name' | 'phone'>('name')
   const [editingItem, setEditingItem] = useState<ChecklistItem | null>(null)
   const [newItemText, setNewItemText] = useState('')
   const [newItemCategory, setNewItemCategory] = useState<ChecklistCategory>('water')
@@ -234,6 +243,17 @@ function App() {
     setNewContactPhone('')
     setNewContactNote('')
   }, [newContactName, newContactPhone, newContactNote])
+
+  const sortContactsList = (contactsList: ContactsData[]) => {
+    const sorted = [...contactsList].sort((a, b) => {
+      if (sortContacts === 'name') {
+        return a.name.localeCompare(b.name)
+      } else {
+        return a.phone.localeCompare(b.phone)
+      }
+    })
+    setContacts(sorted)
+  }
 
   const handleDeleteAllData = useCallback(() => {
     setShowDeleteConfirm(true)
@@ -651,6 +671,138 @@ function App() {
             Важные контакты
           </h2>
 
+          {/* Форма добавления контакта */}
+          <form
+            style={{
+              marginBottom: '20px',
+            }}
+          >
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '12px',
+                marginBottom: '12px',
+              }}
+            >
+              <div>
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: '8px',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                  }}
+                >
+                  Имя контакта
+                </label>
+                <input
+                  value={newContactName}
+                  onChange={(e) => setNewContactName(e.target.value)}
+                  placeholder='Имя контакта'
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: 6,
+                    fontSize: '14px',
+                  }}
+                  aria-label='Имя контакта'
+                />
+              </div>
+              <div>
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: '8px',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                  }}
+                >
+                  Телефон
+                </label>
+                <input
+                  value={newContactPhone}
+                  onChange={(e) => setNewContactPhone(e.target.value)}
+                  placeholder='+7 (999) 000-00-00'
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: 6,
+                    fontSize: '14px',
+                  }}
+                  aria-label='Телефон контакта'
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                gap: '8px',
+                marginTop: '12px',
+              }}
+            >
+              <button
+                onClick={handleAddContact}
+                style={{
+                  padding: '8px 16px',
+                  background: '#10b981',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 6,
+                  fontSize: '14px',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  flex: 1,
+                }}
+              >
+                Добавить контакт
+              </button>
+            </div>
+          </form>
+
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '16px',
+            }}
+          >
+            <span
+              style={{
+                fontSize: '20px',
+                color: 'currentColor',
+              }}
+            >
+              👤
+            </span>
+            <span
+              style={{
+                fontSize: '14px',
+                color: '#64748b',
+              }}
+            >
+              {contacts.length} контакт{contacts.length !== 1 && 'и'}
+            </span>
+            <button
+              onClick={() => setSortContacts(prev => prev === 'name' ? 'phone' : 'name')}
+              style={{
+                padding: '4px 8px',
+                background: 'transparent',
+                border: '1px solid #e2e8f0',
+                borderRadius: 4,
+                fontSize: '12px',
+                color: '#64748b',
+                cursor: 'pointer',
+                lineHeight: 1,
+              }}
+            >
+              Сортировать: {sortContacts === 'name' ? 'по имени' : 'по телефону'}
+            </button>
+          </div>
+
           {contacts.length > 0 ? (
             <div style={{ display: 'grid', gap: 12 }}>
               {contacts.map((contact) => (
@@ -666,6 +818,15 @@ function App() {
                   role="button"
                   tabIndex={0}
                 >
+                  <span
+                    style={{
+                      flex: 1,
+                      fontWeight: 500,
+                      fontSize: '14px',
+                    }}
+                  >
+                    {contactEmoji[contact.name.split(' ')[0].toLowerCase()] || contactEmoji.default}
+                  </span>
                   <span
                     style={{ flex: 1, fontWeight: 500, fontSize: '14px' }}
                   >
