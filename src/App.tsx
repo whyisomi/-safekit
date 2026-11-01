@@ -84,12 +84,11 @@ const ClothingIcon = () => (
   </svg>
 )
 
-// Map category to its icon component
-const categoryIcons: Record<ChecklistCategory, React.ComponentType> = {
-  water: WaterIcon,
-  light: LightIcon,
-  documents: DocumentsIcon,
-  clothing: ClothingIcon,
+const categoryEmoji: Record<ChecklistCategory, string> = {
+  water: '💧',
+  light: '🔦',
+  documents: '📄',
+  clothing: '👕',
 }
 
 const INITIAL_ITEMS: Record<ChecklistCategory, ChecklistItem[]> = {
@@ -386,7 +385,6 @@ function App() {
           >
             {categories.map((cat) => {
               const catItems = checklist.filter((i) => i.category === cat)
-              const IconComponent = categoryIcons[cat]
               return (
                 <div
                   key={cat}
@@ -405,7 +403,7 @@ function App() {
                       marginBottom: '12px',
                     }}
                   >
-                    <IconComponent />
+                    <span style={{ fontSize: '20px', color: 'currentColor' }}>{categoryEmoji[cat]}</span>
                     <span
                       style={{
                         fontWeight: 500,
