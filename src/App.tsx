@@ -454,7 +454,9 @@ function App() {
                 justifyContent: 'center',
               }}
             >
-              <span style={{ fontSize: '24px' }}>100%</span>
+              <span style={{ fontSize: '24px' }}>
+      {readinessPercentage}%
+</span>
             </div>
             <div>
               <div style={{ fontSize: '18px', fontWeight: 500 }}>
