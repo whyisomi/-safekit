@@ -1,40 +1,40 @@
 /* ==========================================
-   SafeKit — Color Scheme & Typography
-   Light: #EAF3FA page bg, #FFFFFF cards, #18324A text
-   Dark: #0B0F14 page bg, #142338 cards, #EAF2F8 text
+   SafeKit — Cool Color Scheme (Ice Blue & Navy)
+   Light: #F0FAFF page bg, #FFFFFF cards, #0E1F29 text
+   Dark: #0A0F14 page bg, #101825 cards, #D0E7F5 text
    ========================================== */
 
 /* --- Light Theme Variables --- */
 :root {
-  --bg: #EAF3FA;
+  --bg: #F0FAFF;
   --bg-card: #FFFFFF;
-  --bg-section: #F8FAFC;
+  --bg-section: #F5FBFF;
 
-  --text: #18324A;
-  --text-secondary: #475467;
-  --text-h: #1e3a50;
+  --text: #0E1F29;
+  --text-secondary: #4A6B7E;
+  --text-h: #152E3A;
 
-  --border: #CBD5E1;
-  --border-focus: #3b82f6;
+  --border: #CDE1F2;
+  --border-focus: #00B8D9;
   --border-card: #FFFFFF;
 
-  --code-bg: #F1F5F9;
+  --code-bg: #E8F0F5;
 
-  --accent: #3b82f6;
-  --accent-bg: rgba(59, 130, 255, 0.15);
-  --accent-border: rgba(59, 130, 255, 0.3);
+  --accent: #00B8D9;
+  --accent-bg: rgba(0, 184, 217, 0.12);
+  --accent-border: rgba(0, 184, 217, 0.25);
 
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
+  --success: #00B377;
+  --warning: #F5A623;
+  --error: #FF4B4B;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
 
   --spacing-1: 0.25rem;   /* 4px  */
   --spacing-2: 0.5rem;    /* 8px  */
@@ -43,8 +43,8 @@
   --spacing-6: 1.5rem;    /* 24px */
   --spacing-8: 2rem;      /* 32px */
 
-  --font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   --font-size-xs: 0.75rem;   /* 12px  */
   --font-size-sm: 0.875rem;  /* 14px  */
@@ -63,43 +63,43 @@
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 
 /* --- Dark Theme Variables --- */
 [data-theme='dark'] {
-  --bg: #0B0F14;
-  --bg-card: #142338;
-  --bg-section: #1a3045;
+  --bg: #0A0F14;
+  --bg-card: #101825;
+  --bg-section: #141D28;
 
-  --text: #EAF2F8;
-  --text-secondary: #A8B5C7;
-  --text-h: #C0D5E5;
+  --text: #D0E7F5;
+  --text-secondary: #6B8E9F;
+  --text-h: #C0D8EE;
 
-  --border: #304050;
-  --border-focus: #64ffda;
-  --border-card: #1e3548;
+  --border: #1E2A3A;
+  --border-focus: #00C8E0;
+  --border-card: #1A2430;
 
-  --code-bg: #1e3a50;
+  --code-bg: #15202B;
 
-  --accent: #64ffda;
-  --accent-bg: rgba(100, 255, 218, 0.15);
-  --accent-border: rgba(100, 255, 218, 0.3);
+  --accent: #00C8E0;
+  --accent-bg: rgba(0, 200, 224, 0.13);
+  --accent-border: rgba(0, 200, 224, 0.22);
 
-  --success: #22c55e;
-  --warning: #eab308;
-  --error: #f87171;
+  --success: #00B894;
+  --warning: #E0A627;
+  --error: #FF5C5C;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.35), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
 
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 20px;
 
-  --webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -131,12 +131,12 @@ h6 {
   line-height: var(--line-height-tight);
 }
 
-/* Text with stroke for readability on light backgrounds */
+/* Text with stroke for readability */
 h1,
 h2,
 p {
-  -webkit-text-stroke: 1px var(--text-stroke-color);
-          text-stroke: 1px var(--text-stroke-color);
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--text), transparent);
+          text-stroke: 1px color-mix(in srgb, var(--text), transparent);
 }
 
 p {
@@ -241,7 +241,7 @@ small,
 
 .btn-primary {
   background: var(--accent);
-  color: white;
+  color: #0A0E12;  /* dark text on accent button */
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -277,7 +277,7 @@ small,
 
 .btn-danger:hover:not(:disabled) {
   background: var(--error);
-  color: white;
+  color: #FFFFFF;
 }
 
 .btn-icon {
@@ -328,7 +328,7 @@ small,
 }
 
 /* ==========================================
-   Interactive Areas (Checklist items, categories)
+   Interactive Areas
    ========================================== */
 .interactive-item {
   transition: background 0.15s ease;
@@ -338,27 +338,36 @@ small,
   background: var(--bg-section);
 }
 
-/* Checklist item hover */
-.item-hover:hover {
+/* Checklist category */
+.checklist-category {
   background: var(--bg-section);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
 }
 
-/* Category category */
-.category-item {
-  transition: all 0.15s ease;
+.checklist-category:hover {
+  background: var(--bg-card);
+  border-color: var(--accent);
 }
 
-.category-item:hover {
-  background: var(--bg-section);
+/* Contact item */
+.contact-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+}
+
+.contact-item:hover {
+  background: var(--bg-section);
 }
 
 /* ==========================================
-   Specific Areas from Screenshots
+   Progress/Readiness Card
    ========================================== */
-
-/* Progress/Readiness card */
 .progress-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -374,45 +383,18 @@ small,
   transition: width 0.3s ease;
 }
 
-/* Checklist categories */
-.checklist-category {
-  background: var(--bg-section);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-3);
-  margin-bottom: var(--spacing-3);
-}
-
-.checklist-category:hover {
-  background: var(--bg-card);
-  border-color: var(--accent);
-}
-
-/* Contacts list */
-.contact-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-3);
-  margin-bottom: var(--spacing-2);
-}
-
-.contact-item:hover {
-  background: var(--bg-section);
-}
-
 /* ==========================================
    Specific Colors from Requirements
    ========================================== */
 
-/* Light theme: text on white */
+/* Light theme: text on cool white */
 :not([data-theme='dark']) {
-  --text-stroke-color: rgba(24, 50, 74, 0.15);
+  --text-stroke-color: rgba(14, 31, 41, 0.1);
 }
 
 /* Dark theme: main text */
 [data-theme='dark'] {
-  --text-stroke-color: rgba(234, 242, 248, 0.15);
+  --text-stroke-color: rgba(208, 231, 245, 0.1);
 }
 
 /* ==========================================
