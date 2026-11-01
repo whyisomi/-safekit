@@ -1,29 +1,64 @@
+/* ==========================================
+   SafeKit — Color Scheme & Typography
+   Light: #EAF3FA page bg, #FFFFFF cards, #18324A text
+   Dark: #0B0F14 page bg, #142338 cards, #EAF2F8 text
+   ========================================== */
+
+/* --- Light Theme Variables --- */
 :root {
-  --text: #0f172a;
-  --text-h: #1e2d44;
-  --bg: #e8f4fd;
-  --border: #cfeaff;
-  --code-bg: #eff6ff;
+  --bg: #EAF3FA;
+  --bg-card: #FFFFFF;
+  --bg-section: #F8FAFC;
+
+  --text: #18324A;
+  --text-secondary: #475467;
+  --text-h: #1e3a50;
+
+  --border: #CBD5E1;
+  --border-focus: #3b82f6;
+  --border-card: #FFFFFF;
+
+  --code-bg: #F1F5F9;
+
   --accent: #3b82f6;
-  --accent-bg: rgba(59, 130, 246, 0.1);
-  --accent-border: rgba(59, 130, 246, 0.3);
-  --social-bg: rgba(240, 246, 255, 0.3);
-  --shadow:
-    rgba(0, 0, 0, 0.05) 0 10px 15px -3px, rgba(0, 0, 0, 0.02) 0 4px 6px -2px;
+  --accent-bg: rgba(59, 130, 255, 0.15);
+  --accent-border: rgba(59, 130, 255, 0.3);
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
 
-  /* Reduced brightness for light theme - more opaque white-blue */
-  --bg-opacity: 0.9;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-  /* Text stroke for readability */
-  --text-stroke: 1px color-mix(in srgb, var(--text), transparent);
-  -webkit-text-stroke: var(--text-stroke);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  --spacing-1: 0.25rem;   /* 4px  */
+  --spacing-2: 0.5rem;    /* 8px  */
+  --spacing-3: 0.75rem;   /* 12px */
+  --spacing-4: 1rem;      /* 16px */
+  --spacing-6: 1.5rem;    /* 24px */
+  --spacing-8: 2rem;      /* 32px */
+
+  --font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  --font-size-xs: 0.75rem;   /* 12px  */
+  --font-size-sm: 0.875rem;  /* 14px  */
+  --font-size-base: 1rem;    /* 16px  */
+  --font-size-lg: 1.125rem;  /* 18px  */
+  --font-size-xl: 1.25rem;   /* 20px  */
+  --font-size-2xl: 1.5rem;   /* 24px  */
+  --font-size-3xl: 1.875rem; /* 30px  */
+  --font-size-4xl: 2.25rem;  /* 36px  */
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -32,219 +67,369 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #cfe8ff;
-    --text-h: #e0f4ff;
-    --bg: #0d1b2a;
-    --border: #1e4d70;
-    --code-bg: #1a3a5c;
-    --accent: #64ffda;
-    --accent-bg: rgba(100, 255, 218, 0.15);
-    --accent-border: rgba(100, 255, 218, 0.5);
-    --social-bg: rgba(10, 25, 40, 0.5);
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
+/* --- Dark Theme Variables --- */
 [data-theme='dark'] {
-  --text: #cfe8ff;
-  --text-h: #e0f4ff;
-  --bg: #0d1b2a;
-  --border: #1e4d70;
-  --code-bg: #1a3a5c;
+  --bg: #0B0F14;
+  --bg-card: #142338;
+  --bg-section: #1a3045;
+
+  --text: #EAF2F8;
+  --text-secondary: #A8B5C7;
+  --text-h: #C0D5E5;
+
+  --border: #304050;
+  --border-focus: #64ffda;
+  --border-card: #1e3548;
+
+  --code-bg: #1e3a50;
+
   --accent: #64ffda;
   --accent-bg: rgba(100, 255, 218, 0.15);
-  --accent-border: rgba(100, 255, 218, 0.5);
-  --social-bg: rgba(10, 25, 40, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --accent-border: rgba(100, 255, 218, 0.3);
+
+  --success: #22c55e;
+  --warning: #eab308;
+  --error: #f87171;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.35), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+
+  --webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Fluid typography — headline scales */
-h1 {
-  font-family: var(--heading);
-  font-weight: 500;
+/* ==========================================
+   Base & Body
+   ========================================== */
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================
+   Text & Typography
+   ========================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--text-h);
-  line-height: var(--line-height-tight);
-  letter-spacing: -0.02em;
-  /* Text stroke for light theme readability */
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--text), transparent);
-          text-stroke: 1px color-mix(in srgb, var(--text), transparent);
-  /* Rounded font optical-sizing */
-  font-optical-sizing: auto;
-}
-
-h1 {
-  font-size: clamp(28px, 5vw + 20px, 56px);
-  margin: var(--spacing-6) 0;
-}
-
-h2 {
-  font-family: var(--heading);
+  margin-top: 0;
+  margin-bottom: var(--spacing-3);
   font-weight: 500;
-  color: var(--text-h);
   line-height: var(--line-height-tight);
-  letter-spacing: -0.02em;
-  /* Text stroke for readability */
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--text), transparent);
-          text-stroke: 1px color-mix(in srgb, var(--text), transparent);
-  font-optical-sizing: auto;
 }
 
-h2 {
-  font-size: clamp(20px, 4vw + 16px, 24px);
-  margin: var(--spacing-4) 0 0;
+/* Text with stroke for readability on light backgrounds */
+h1,
+h2,
+p {
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+          text-stroke: 1px var(--text-stroke-color);
 }
 
 p {
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-relaxed);
   color: var(--text);
-  /* Text stroke for readability */
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--text), transparent);
-          text-stroke: 1px color-mix(in srgb, var(--text), transparent);
-  margin: 0 0 var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  line-height: var(--line-height-normal);
 }
 
-/* Code blocks */
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
+/* Secondary text - muted but readable */
+.text-secondary,
+small,
+.caption {
+  color: var(--text-secondary) !important;
+}
+
+/* ==========================================
+   Containers & Cards
+   ========================================== */
+/* Light theme card background */
+:not([data-theme='dark']) .card,
+:not([data-theme='dark']) .panel,
+:not([data-theme='dark']) .section {
+  background: var(--bg-card) !important;
+  border-color: var(--border-card) !important;
+}
+
+/* Dark theme card background */
+[data-theme='dark'] .card,
+[data-theme='dark'] .panel,
+[data-theme='dark'] .section {
+  background: var(--bg-card) !important;
+  border-color: var(--border-card) !important;
+}
+
+/* Card with subtle shadow */
+.card,
+.panel,
+.section {
+  background: var(--bg-section);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  color: var(--text-h);
-  background: var(--code-bg);
-  padding: var(--spacing-1) var(--spacing-2);
-  font-size: var(--font-size-sm);
-  /* Code blocks don't need stroke */
-  -webkit-text-stroke: none;
-          text-stroke: none;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease;
 }
 
-/* Buttons */
-button {
-  font-family: var(--sans);
+.card:hover,
+.panel:hover,
+.section:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ==========================================
+   Borders & Shadows
+   ========================================== */
+.border-primary {
+  border-color: var(--border) !important;
+}
+
+.border-secondary {
+  border-color: var(--text-secondary) !important;
+}
+
+.border-accent {
+  border-color: var(--accent) !important;
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   Buttons
+   ========================================== */
+.btn {
+  font-family: inherit;
   font-weight: 500;
   cursor: pointer;
+  border-radius: var(--radius-md);
   transition: all 0.2s ease;
   border: none;
   outline: none;
-  /* Buttons have solid background so no stroke needed */
-  -webkit-text-stroke: none;
-          text-stroke: none;
 }
 
-button:focus-visible {
-  outline: 2px solid var(--accent);
+.btn:focus-visible {
+  outline: 2px solid var(--border-focus);
   outline-offset: 2px;
-  -webkit-text-stroke: none;
-          text-stroke: none;
 }
 
-button:hover:not(:disabled) {
-  filter: brightness(1.05);
-  -webkit-text-stroke: none;
-          text-stroke: none;
-}
-
-button:active:not(:disabled) {
-  transform: scale(0.98);
-  -webkit-text-stroke: none;
-          text-stroke: none;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  -webkit-text-stroke: none;
-          text-stroke: none;
-}
-
-/* Primary actions */
 .btn-primary {
   background: var(--accent);
   color: white;
-  -webkit-text-stroke: none;
-          text-stroke: none;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--accent), black 10%);
-  -webkit-text-stroke: none;
-          text-stroke: none;
+  background: color-mix(in srgb, var(--accent), black 15%);
+  transform: translateY(-1px);
 }
 
-/* Secondary */
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .btn-secondary {
   background: transparent;
-  border: 1px solid var(--border);
   color: var(--text);
-  -webkit-text-stroke: var(--text-stroke);
-          text-stroke: var(--text-stroke);
+  border: 1px solid var(--border);
 }
 
 .btn-secondary:hover:not(:disabled) {
   border-color: var(--accent);
   color: var(--accent);
-  -webkit-text-stroke: var(--text-stroke);
-          text-stroke: var(--text-stroke);
 }
 
-/* Danger */
 .btn-danger {
   background: transparent;
-  border: 1px solid #ef4444;
-  color: #ef4444;
-  -webkit-text-stroke: var(--text-stroke);
-          text-stroke: var(--text-stroke);
+  color: var(--error);
+  border: 1px solid var(--error);
 }
 
 .btn-danger:hover:not(:disabled) {
-  background: #ef4444;
+  background: var(--error);
   color: white;
-  -webkit-text-stroke: var(--text-stroke);
-          text-stroke: var(--text-stroke);
 }
 
-/* Section cards */
-.section-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.btn-icon {
+  background: transparent;
+  padding: var(--spacing-1);
+  border-radius: var(--radius-sm);
 }
 
-.section-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.btn-icon:hover:not(:disabled) {
+  background: var(--accent-bg);
 }
 
-/* Ready indicator animation */
-.ready-percent {
-  transition: transform 0.3s ease, color 0.3s ease;
-  -webkit-text-stroke: var(--text-stroke);
-          text-stroke: var(--text-stroke);
+/* ==========================================
+   Form Elements
+   ========================================== */
+.input,
+.select,
+.textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  color: var(--text);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-2) var(--spacing-3);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ready-indicator {
-  transition: background 0.3s ease;
-  -webkit-text-stroke: var(--text-stroke);
-          text-stroke: var(--text-stroke);
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
-/* Theme transition */
-* {
-  transition-property: color, background, border, box-shadow, transform;
-  transition-timing-function: ease-out;
-  transition-duration: 0.2s;
+.input::placeholder,
+.select::placeholder,
+.textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8;
 }
 
-/* Reduce motion */
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ==========================================
+   Interactive Areas (Checklist items, categories)
+   ========================================== */
+.interactive-item {
+  transition: background 0.15s ease;
+}
+
+.interactive-item:hover:not(.disabled) {
+  background: var(--bg-section);
+}
+
+/* Checklist item hover */
+.item-hover:hover {
+  background: var(--bg-section);
+  border-radius: var(--radius-md);
+}
+
+/* Category category */
+.category-item {
+  transition: all 0.15s ease;
+}
+
+.category-item:hover {
+  background: var(--bg-section);
+  border-radius: var(--radius-md);
+}
+
+/* ==========================================
+   Specific Areas from Screenshots
+   ========================================== */
+
+/* Progress/Readiness card */
+.progress-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.progress-card .progress-bar {
+  background: var(--accent);
+  height: 8px;
+  border-radius: var(--radius-sm);
+  transition: width 0.3s ease;
+}
+
+/* Checklist categories */
+.checklist-category {
+  background: var(--bg-section);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+.checklist-category:hover {
+  background: var(--bg-card);
+  border-color: var(--accent);
+}
+
+/* Contacts list */
+.contact-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+}
+
+.contact-item:hover {
+  background: var(--bg-section);
+}
+
+/* ==========================================
+   Specific Colors from Requirements
+   ========================================== */
+
+/* Light theme: text on white */
+:not([data-theme='dark']) {
+  --text-stroke-color: rgba(24, 50, 74, 0.15);
+}
+
+/* Dark theme: main text */
+[data-theme='dark'] {
+  --text-stroke-color: rgba(234, 242, 248, 0.15);
+}
+
+/* ==========================================
+   Responsive & Reduced Motion
+   ========================================== */
+@media (max-width: 640px) {
+  .card,
+  .panel,
+  .section {
+    margin: 0 -var(--spacing-1) var(--spacing-1);
+    border-radius: var(--radius-sm);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
     animation: none !important;
-    scroll-behavior: auto !important;
   }
 }

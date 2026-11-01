@@ -41,10 +41,10 @@ const THEME_KEY = 'safekit-theme'
 const THEMES = { LIGHT: 'light', DARK: 'dark' }
 
 const CATEGORY_DEFS: Record<ChecklistCategory, { label: string; icon: string }> = {
-  water: { label: 'Вода и еда', icon: '💧' },
-  light: { label: 'Свет и зарядка', icon: '🔋' },
-  documents: { label: 'Документы', icon: '📄' },
-  clothing: { label: 'Одежда и другое', icon: '👕' },
+  water: { label: 'Вода и еда', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"/></svg>' },
+  light: { label: 'Свет и зарядка', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v6h4v12h-6v-4h-2v-4zm5-12h-5l-3 9 3 5 4-6h4L14 5z"/></svg>' },
+  documents: { label: 'Документы', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"/><path d="M14 2H6a2 2 0 0 0-2 2v16l4-1 1-4h2v-10.5l-2.5 1.5L12 5.5l2.5 1.5L18 10.5l4-1V4a2 2 0 0 0-2-2zM18 4h2v2h-2V4zm0 3h2v3h-2V7zm0 5h2v2h-2v-2z"/></svg>' },
+  clothing: { label: 'Одежда и другое', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3v2h2V3H3zm4 0v2h2V3H7zm4 0v2h2V3H7zm4 0v2h2v-3h-2zm-6 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm0 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm0 4c-1.1 0-2 .9-2 2v2h2v-2h-2v-2h2v2zm10-4h-2v2h2v-2h-2zm0 4h-2v2h2v-2h-2zm0 4h-2v2h2v-2h-2zm2 2h2v2h-2v-2h-2zm0-6h2v2h-2v-2h-2zm4 4v2h2v-2h-2zm-4 4v-2h-2v2h-2zm0-6v-2h-2v2h-2zm4 0v2h2v-2h-2zm-4-4v-2h-2v2h-2zm0-4v-2h-2v2h-2zm6-2h-2v2h2v-2zm4 4v-2h-2v2h-2zm-6-4v2h-2v2h2v-2zm0-4v2h-2v2h2v-2z"/></svg>' },
 }
 
 const INITIAL_ITEMS: Record<ChecklistCategory, ChecklistItem[]> = {
