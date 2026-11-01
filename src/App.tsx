@@ -37,6 +37,9 @@ const STORAGE_KEYS = {
   SETTINGS: 'safekit-settings',
 } as const
 
+const THEME_KEY = 'safekit-theme'
+const THEMES = { LIGHT: 'light', DARK: 'dark' }
+
 const CATEGORY_DEFS: Record<ChecklistCategory, { label: string; icon: string }> = {
   water: { label: 'Вода и еда', icon: '💧' },
   light: { label: 'Свет и зарядка', icon: '🔋' },
@@ -55,6 +58,24 @@ const INITIAL_CONTACTS: ContactsData = []
 const INITIAL_SETTINGS: AppSettings = {
   meetingAddress: '',
   personalNotes: '',
+}
+
+const loadThemeFromStorage = (): 'light' | 'dark' => {
+  try {
+    const stored = localStorage.getItem(THEME_KEY)
+    return stored === THEMES.DARK ? THEMES.DARK : THEMES.LIGHT
+  } catch {
+    return THEMES.LIGHT
+  }
+}
+
+function saveThemeToStorage(theme: 'light' | 'dark') {
+  try {
+    localStorage.setItem(THEME_KEY, theme)
+    return true
+  } catch {
+    return false
+  }
 }
 
 function loadFromLocalStorage(key: string, defaultValue: any) {
@@ -101,6 +122,13 @@ function App() {
   )
   const [editingItem, setEditingItem] = useState<ChecklistItem | null>(null)
   const [newItemText, setNewItemText] = useState('')
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    // Respect system preference on first load, fallback to light
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const stored = localStorage.getItem(THEME_KEY)
+    if (stored) return stored === 'dark' ? 'dark' : 'light'
+    return prefersDark ? 'dark' : 'light'
+  })
   const [newItemCategory, setNewItemCategory] = useState<ChecklistCategory>('water')
   const [newItemQuantity, setNewItemQuantity] = useState('')
   const [newItemNote, setNewItemNote] = useState('')
@@ -117,7 +145,8 @@ function App() {
     saveToLocalStorage(STORAGE_KEYS.CHECKLIST, checklist)
     saveToLocalStorage(STORAGE_KEYS.CONTACTS, contacts)
     saveToLocalStorage(STORAGE_KEYS.SETTINGS, settings)
-  }, [checklist, contacts, settings])
+    saveThemeToStorage(theme)
+  }, [checklist, contacts, settings, theme])
 
   const handleAddItem = useCallback(() => {
     if (!newItemText.trim()) return
@@ -369,20 +398,29 @@ function App() {
     printWindow.print()
   }, [checklist, contacts])
 
-  return (
+  const themeStyles = theme === 'dark'
+      ? {
+          minHeight: '100vh',
+          background: '#0f0f23',
+          color: '#e8eaed',
+          fontFamily: 'system-ui, sans-serif',
+        }
+      : {
+          minHeight: '100vh',
+          background: '#F5F1E8',
+          color: theme === 'dark' ? '#9ca3af' : '#1e293b',
+          fontFamily: 'system-ui, sans-serif',
+        }
+
+return (
     <div
-      style={{
-        minHeight: '100vh',
-        background: '#F5F1E8',
-        color: '#1e293b',
-        fontFamily: 'system-ui, sans-serif',
-      }}
+      style={themeStyles}
     >
       <header
         style={{
           padding: '20px 24px',
-          background: 'white',
-          borderBottom: '1px solid #e2e8f0',
+          background: theme === 'dark' ? '#0f0f23' : 'white',
+          borderBottom: theme === 'dark' ? '1px solid #4a4a4a' : '1px solid #e2e8f0',
         }}
       >
         <h1 style={{ margin: 0, fontSize: '24px', fontWeight: 600 }}>SafeKit</h1>
@@ -390,21 +428,38 @@ function App() {
           style={{
             margin: '8px 0 0 0',
             fontSize: '14px',
-            color: '#64748b',
+            color: theme === 'dark' ? '#9ca3af' : '#64748b',
           }}
         >
           Локальное планирование безопасности
         </p>
+        <button
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          style={{
+            marginLeft: '16px',
+            padding: '6px 12px',
+            background: 'transparent',
+            border: '1px solid #64748b',
+            borderRadius: 6,
+            fontSize: '12px',
+            color: theme === 'dark' ? '#9ca3af' : '#64748b',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+          }}
+          aria-label='Сменить тему'
+        >
+          {theme === 'dark' ? 'Светлая тема' : 'Темная тема'}
+        </button>
       </header>
 
       <main style={{ padding: '24px' }}>
         <div
           style={{
-            background: 'white',
+            background: theme === 'dark' ? '#0f0f23' : 'white',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
-            boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
+            boxShadow: theme === 'dark' ? '0 1px 2px 0 rgba(0,0,0,0.3)' : '0 1px 2px 0 rgba(0,0,0,0.05)',
           }}
         >
           <div
@@ -419,7 +474,7 @@ function App() {
                 width: 48,
                 height: 48,
                 borderRadius: 12,
-                background: '#e2e8f0',
+                background: theme === 'dark' ? '#2a2d3a' : '#e2e8f0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -439,7 +494,7 @@ function App() {
               <div
                 style={{
                   fontSize: '14px',
-                  color: '#64748b',
+                  color: theme === 'dark' ? '#9ca3af' : '#64748b',
                 }}
               >
                 {completedItems} завершено
@@ -465,7 +520,7 @@ function App() {
 
         <section
           style={{
-            background: 'white',
+            background: theme === 'dark' ? '#0f0f23' : 'white',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
@@ -496,10 +551,10 @@ function App() {
                 <div
                   key={cat}
                   style={{
-                    border: '1px solid #e2e8f0',
+                    border: '1px solid theme === 'dark' ? '#4a4a4a' : '#e2e8f0',
                     borderRadius: 12,
                     padding: 20,
-                    background: 'white',
+                    background: theme === 'dark' ? '#0f0f23' : 'white',
                   }}
                 >
                   <div
@@ -529,7 +584,7 @@ function App() {
                           alignItems: 'center',
                           gap: '12px',
                           padding: '8px 0',
-                          borderBottom: '1px solid #f1f5f9',
+                          borderBottom: '1px solid theme === 'dark' ? '#4a4a4a' : '#f1f5f9',
                         }}
                         role="button"
                         tabIndex={0}
@@ -560,14 +615,14 @@ function App() {
                         </span>
                         {item.quantity !== undefined && (
                           <span
-                            style={{ color: '#64748b', fontSize: '12px' }}
+                            style={{ color: theme === 'dark' ? '#9ca3af' : '#64748b', fontSize: '12px' }}
                           >
                             ×{item.quantity}
                           </span>
                         )}
                         {item.note && (
                           <span
-                            style={{ color: '#64748b', fontSize: '12px' }}
+                            style={{ color: theme === 'dark' ? '#9ca3af' : '#64748b', fontSize: '12px' }}
                           >
                             ({item.note})
                           </span>
@@ -577,10 +632,10 @@ function App() {
                             marginLeft: 'auto',
                             padding: '4px 8px',
                             background: 'transparent',
-                            border: '1px solid #e2e8f0',
+                            border: '1px solid theme === 'dark' ? '#4a4a4a' : '#e2e8f0',
                             borderRadius: 4,
                             fontSize: '12px',
-                            color: '#64748b',
+                            color: theme === 'dark' ? '#9ca3af' : '#64748b',
                             cursor: 'pointer',
                             lineHeight: 1,
                           }}
@@ -636,7 +691,7 @@ function App() {
                 placeholder='Название предмета'
                 style={{
                   padding: '8px 12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                 }}
@@ -650,7 +705,7 @@ function App() {
                 }
                 style={{
                   padding: '8px 12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                 }}
@@ -669,7 +724,7 @@ function App() {
                 type='number'
                 style={{
                   padding: '8px 12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                   width: '100%',
@@ -682,7 +737,7 @@ function App() {
                 placeholder='Заметка (опционально)'
                 style={{
                   padding: '8px 12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                   width: '100%',
@@ -711,7 +766,7 @@ function App() {
 
         <section
           style={{
-            background: 'white',
+            background: theme === 'dark' ? '#0f0f23' : 'white',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
@@ -738,7 +793,7 @@ function App() {
                     alignItems: 'center',
                     gap: '12px',
                     padding: '8px 0',
-                    borderBottom: '1px solid #f1f5f9',
+                    borderBottom: '1px solid theme === 'dark' ? '#4a4a4a' : '#f1f5f9',
                   }}
                   role="button"
                   tabIndex={0}
@@ -755,13 +810,13 @@ function App() {
                     {contact.name}
                   </span>
                   <span
-                    style={{ color: '#64748b', fontSize: '13px' }}
+                    style={{ color: theme === 'dark' ? '#9ca3af' : '#64748b', fontSize: '13px' }}
                   >
                     {contact.phone}
                   </span>
                   {contact.note && (
                     <span
-                      style={{ color: '#64748b', fontSize: '12px', fontStyle: 'italic' }}
+                      style={{ color: theme === 'dark' ? '#9ca3af' : '#64748b', fontSize: '12px', fontStyle: 'italic' }}
                     >
                       ({contact.note})
                     </span>
@@ -771,10 +826,10 @@ function App() {
                       marginLeft: 'auto',
                       padding: '4px 8px',
                       background: 'transparent',
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid theme === 'dark' ? '#4a4a4a' : '#e2e8f0',
                       borderRadius: 4,
                       fontSize: '12px',
-                      color: '#64748b',
+                      color: theme === 'dark' ? '#9ca3af' : '#64748b',
                       cursor: 'pointer',
                       lineHeight: 1,
                     }}
@@ -821,7 +876,7 @@ function App() {
                 placeholder='Имя контакта'
                 style={{
                   padding: '8px 12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                 }}
@@ -834,7 +889,7 @@ function App() {
                 type='tel'
                 style={{
                   padding: '8px 12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                   width: '100%',
@@ -848,7 +903,7 @@ function App() {
                 placeholder='Заметка (опционально)'
                 style={{
                   padding: '8px 12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                   width: '100%',
@@ -877,7 +932,7 @@ function App() {
 
         <section
           style={{
-            background: 'white',
+            background: theme === 'dark' ? '#0f0f23' : 'white',
             borderRadius: 12,
             padding: 24,
             boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
@@ -920,7 +975,7 @@ function App() {
                 style={{
                   width: '100%',
                   padding: '12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                 }}
@@ -947,7 +1002,7 @@ function App() {
                 style={{
                   width: '100%',
                   padding: '12px',
-                  border: '1px solid #cbd5e1',
+                  border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
                   resize: 'vertical',
@@ -1032,9 +1087,9 @@ function App() {
                   onClick={() => setShowDeleteConfirm(false)}
                   style={{
                     padding: '8px 16px',
-                    background: 'white',
-                    color: '#1e293b',
-                    border: '1px solid #e2e8f0',
+                    background: theme === 'dark' ? '#0f0f23' : 'white',
+                    color: theme === 'dark' ? '#9ca3af' : '#1e293b',
+                    border: '1px solid theme === 'dark' ? '#4a4a4a' : '#e2e8f0',
                     borderRadius: 6,
                     fontSize: '14px',
                     cursor: 'pointer',
