@@ -138,6 +138,7 @@ function App() {
   const [settings, setSettings] = useState<AppSettings>(() =>
     loadFromLocalStorage('safekit-settings', INITIAL_SETTINGS)
   )
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [editingItem, setEditingItem] = useState<ChecklistItem | null>(null)
   const [newItemText, setNewItemText] = useState('')
   const [newItemCategory, setNewItemCategory] = useState<ChecklistCategory>('water')
@@ -277,10 +278,11 @@ function App() {
 
   return (
     <div
+      data-theme={theme}
       style={{
         minHeight: '100vh',
-        background: '#F5F1E8',
-        color: '#1e293b',
+        background: theme === 'dark' ? '#0B0F14' : '#F5F1E8',
+        color: theme === 'dark' ? '#EAF2F8' : '#1e293b',
         fontFamily: 'system-ui, sans-serif',
       }}
     >
@@ -292,6 +294,31 @@ function App() {
         }}
       >
         <h1 style={{ margin: 0, fontSize: '24px', fontWeight: 600 }}>SafeKit</h1>
+        <div
+          style={{
+            marginLeft: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <button
+            onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+            style={{
+              padding: '6px 12px',
+              background: 'transparent',
+              border: '1px solid #e2e8f0',
+              borderRadius: 6,
+              fontSize: '12px',
+              color: '#64748b',
+              cursor: 'pointer',
+              lineHeight: 1,
+            }}
+            aria-label='Сменить тему'
+          >
+            <span style={{ fontSize: '20px' }}>{theme === 'dark' ? '🌞' : '🌙'}</span>
+          </button>
+        </div>
         <p
           style={{
             margin: '8px 0 0 0',
@@ -396,7 +423,7 @@ function App() {
                     border: '1px solid #4a4a4a',
                     borderRadius: 12,
                     padding: 20,
-                    background: '#F5F1E8',
+                    background: theme === 'dark' ? '#0B0F14' : '#F5F1E8',
                   }}
                 >
                   <div
@@ -743,7 +770,7 @@ function App() {
                   style={{
                     padding: '8px 16px',
                     background: 'white',
-                    color: '#1e293b',
+                    color: theme === 'dark' ? '#EAF2F8' : '#1e293b',
                     border: '1px solid #e2e8f0',
                     borderRadius: 6,
                     fontSize: '14px',
