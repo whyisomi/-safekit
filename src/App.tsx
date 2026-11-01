@@ -566,7 +566,7 @@ return (
                       marginBottom: '12px',
                     }}
                   >
-                    <span style={{ fontSize: '20px', lineHeight: 1 }}>{catDef?.icon}</span>
+                    <span dangerouslySetInnerHTML={{ __html: catDef.icon }} />
                     <span
                       style={{
                         fontWeight: 500,
