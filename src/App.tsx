@@ -345,6 +345,102 @@ function App() {
               display: 'flex',
               alignItems: 'center',
               gap: '12px',
+              marginBottom: '24px',
+            }}
+          >
+            <input
+              value={newItemText}
+              onChange={(e) => setNewItemText(e.target.value)}
+              placeholder='Введите текст пункта...'
+              style={{
+                flex: 1,
+                padding: '8px 12px',
+                border: '1px solid #cbd5e1',
+                borderRadius: 6,
+                fontSize: '14px',
+                fontFamily: 'system-ui, sans-serif',
+              }}
+            />
+            <select
+              value={newItemCategory}
+              onChange={(e) => setNewItemCategory(e.target.value as ChecklistCategory)}
+              style={{
+                padding: '8px 12px',
+                border: '1px solid #cbd5e1',
+                borderRadius: 6,
+                fontSize: '14px',
+                minWidth: '120px',
+                appearance: 'none',
+                backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\'><polygon points="0,0 10,0 5,5"/></svg>)',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 8px top 50%',
+                cursor: 'pointer',
+              }}
+            >
+              <option value="water">Вода и еда</option>
+              <option value="light">Свет и зарядка</option>
+              <option value="documents">Документы</option>
+              <option value="clothing">Одежда и другое</option>
+            </select>
+            <input
+              value={newItemQuantity || ''}
+              onChange={(e) => setNewItemQuantity(e.target.value)}
+              placeholder='Количество (необязательно)'
+              style={{
+                width: '80px',
+                padding: '8px 12px',
+                border: '1px solid #cbd5e1',
+                borderRadius: 6,
+                fontSize: '14px',
+                textAlign: 'center',
+                minWidth: '80px',
+              }}
+            />
+            <textarea
+              value={newItemNote || ''}
+              onChange={(e) => setNewItemNote(e.target.value)}
+              placeholder='Заметка (необязательно)'
+              rows={2}
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                border: '1px solid #cbd5e1',
+                borderRadius: 6,
+                fontSize: '14px',
+                resize: 'vertical',
+              }}
+            /></div>
+            <button
+              onClick={handleAddItem}
+              style={{
+                padding: '8px 16px',
+                background: '#10b981',
+                color: 'white',
+                border: 'none',
+                borderRadius: 6,
+                fontSize: '14px',
+                fontWeight: 500,
+                cursor: 'pointer',
+                marginLeft: '12px',
+              }}
+            >
+              Добавить пункт
+            </button>
+          </div>
+        <div
+          style={{
+            background: 'white',
+            borderRadius: 12,
+            padding: 24,
+            marginBottom: 32,
+            boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
             }}
           >
             <div
