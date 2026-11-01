@@ -334,8 +334,12 @@ function App() {
               <span style={{ fontSize: '24px' }}>100%</span>
             </div>
             <div>
-              <div style={{ fontSize: '18px', fontWeight: 500 }}>100 пунктов</div>
-              <div style={{ fontSize: '14px', color: '#64748b' }}>100 завершено</div>
+              <div style={{ fontSize: '18px', fontWeight: 500 }}>
+                {totalItems} пунктов
+              </div>
+              <div style={{ fontSize: '14px', color: '#64748b' }}>
+                {completedItems} завершено
+              </div>
             </div>
           </div>
 
