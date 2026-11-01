@@ -258,7 +258,7 @@ btn-primary:disabled {
   cursor: not-allowed;
 }
 
-.btn-secondary {
+btn-secondary {
   background: transparent;
   color: var(--text);
   border: 1px solid var(--border);
@@ -280,7 +280,7 @@ btn-danger:hover:not(:disabled) {
   color: white;
 }
 
-.btn-icon {
+btn-icon {
   background: transparent;
   padding: var(--spacing-1);
   border-radius: var(--radius-sm);
