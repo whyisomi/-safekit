@@ -118,21 +118,98 @@ p {
   margin: 0 0 var(--spacing-4);
 }
 
-/* Code blocks */
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: var(--radius-md);
-  color: var(--text-h);
-  background: var(--code-bg);
-  padding: var(--spacing-1) var(--spacing-2);
-  font-size: var(--font-size-sm);
+/* Buttons */
+button {
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
 }
 
-code {
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-normal);
-  padding: var(--spacing-1) var(--spacing-2);
-  background: var(--code-bg);
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary actions */
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent), black 10%);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Danger */
+.btn-danger {
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #ef4444;
+  color: white;
+}
+
+/* Section cards */
+.section-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ready indicator animation */
+.ready-percent {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.ready-indicator {
+  transition: background 0.3s ease;
+}
+
+/* Theme transition */
+* {
+  transition-property: color, background, border, box-shadow, transform;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
 }

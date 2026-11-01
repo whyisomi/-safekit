@@ -512,6 +512,7 @@ return (
               borderRadius: 6,
               fontSize: '14px',
               cursor: 'pointer',
+              transition: 'all 0.2s ease',
             }}
           >
             Сбросить отметки
@@ -694,6 +695,7 @@ return (
                   border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
+                  transition: 'border-color 0.2s ease',
                 }}
                 aria-label='Название предмета для чек-листа'
                 autoFocus
@@ -708,6 +710,7 @@ return (
                   border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
+                  transition: 'border-color 0.2s ease',
                 }}
                 aria-label='Категория предмета'
               >
@@ -755,6 +758,7 @@ return (
                   fontSize: '14px',
                   fontWeight: 500,
                   cursor: 'pointer',
+                  transition: 'all 0.2s ease',
                 }}
                 aria-label='Добавить предмет в чек-лист'
               >
@@ -879,6 +883,7 @@ return (
                   border: theme === 'dark' ? '1px solid #64748b' : '1px solid #cbd5e1',
                   borderRadius: 6,
                   fontSize: '14px',
+                  transition: 'border-color 0.2s ease',
                 }}
                 aria-label='Имя контакта'
               />
@@ -921,6 +926,7 @@ return (
                   fontSize: '14px',
                   fontWeight: 500,
                   cursor: 'pointer',
+                  transition: 'all 0.2s ease',
                 }}
                 aria-label='Добавить контакт'
               >
@@ -1048,6 +1054,7 @@ return (
               fontSize: '14px',
               fontWeight: 500,
               cursor: 'pointer',
+              transition: 'all 0.2s ease',
             }}
             aria-label='Удалить все сохраненные данные'
           >
