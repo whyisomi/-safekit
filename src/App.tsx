@@ -408,7 +408,7 @@ function App() {
       : {
           minHeight: '100vh',
           background: '#F5F1E8',
-          color: theme === 'dark' ? '#9ca3af' : '#1e293b',
+          color: '#1e293b',
           fontFamily: 'system-ui, sans-serif',
         }
 
@@ -419,7 +419,7 @@ return (
       <header
         style={{
           padding: '20px 24px',
-          background: theme === 'dark' ? '#0f0f23' : 'white',
+          background: '#F5F1E8',
           borderBottom: theme === 'dark' ? '1px solid #4a4a4a' : '1px solid #e2e8f0',
         }}
       >
@@ -428,7 +428,7 @@ return (
           style={{
             margin: '8px 0 0 0',
             fontSize: '14px',
-            color: theme === 'dark' ? '#9ca3af' : '#64748b',
+            color: '#64748b',
           }}
         >
           Локальное планирование безопасности
@@ -442,7 +442,7 @@ return (
             border: '1px solid #64748b',
             borderRadius: 6,
             fontSize: '12px',
-            color: theme === 'dark' ? '#9ca3af' : '#64748b',
+            color: '#64748b',
             cursor: 'pointer',
             transition: 'all 0.2s',
           }}
@@ -455,11 +455,11 @@ return (
       <main style={{ padding: '24px' }}>
         <div
           style={{
-            background: theme === 'dark' ? '#0f0f23' : 'white',
+            background: '#F5F1E8',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
-            boxShadow: theme === 'dark' ? '0 1px 2px 0 rgba(0,0,0,0.3)' : '0 1px 2px 0 rgba(0,0,0,0.05)',
+            boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
           }}
         >
           <div
@@ -474,7 +474,7 @@ return (
                 width: 48,
                 height: 48,
                 borderRadius: 12,
-                background: theme === 'dark' ? '#2a2d3a' : '#e2e8f0',
+                background: '#e2e8f0',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -494,7 +494,7 @@ return (
               <div
                 style={{
                   fontSize: '14px',
-                  color: theme === 'dark' ? '#9ca3af' : '#64748b',
+                  color: '#64748b',
                 }}
               >
                 {completedItems} завершено
@@ -521,7 +521,7 @@ return (
 
         <section
           style={{
-            background: theme === 'dark' ? '#0f0f23' : 'white',
+            background: '#F5F1E8',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
@@ -552,10 +552,10 @@ return (
                 <div
                   key={cat}
                   style={{
-                    border: '1px solid theme === 'dark' ? '#4a4a4a' : '#e2e8f0',
+                    border: '1px solid #4a4a4a',
                     borderRadius: 12,
                     padding: 20,
-                    background: theme === 'dark' ? '#0f0f23' : 'white',
+                    background: '#F5F1E8',
                   }}
                 >
                   <div
@@ -585,7 +585,7 @@ return (
                           alignItems: 'center',
                           gap: '12px',
                           padding: '8px 0',
-                          borderBottom: '1px solid theme === 'dark' ? '#4a4a4a' : '#f1f5f9',
+                          borderBottom: '1px solid #4a4a4a',
                         }}
                         role="button"
                         tabIndex={0}
@@ -616,14 +616,14 @@ return (
                         </span>
                         {item.quantity !== undefined && (
                           <span
-                            style={{ color: theme === 'dark' ? '#9ca3af' : '#64748b', fontSize: '12px' }}
+                            style={{ color: '#64748b', fontSize: '12px' }}
                           >
                             ×{item.quantity}
                           </span>
                         )}
                         {item.note && (
                           <span
-                            style={{ color: theme === 'dark' ? '#9ca3af' : '#64748b', fontSize: '12px' }}
+                            style={{ color: '#64748b', fontSize: '12px' }}
                           >
                             ({item.note})
                           </span>
@@ -633,10 +633,10 @@ return (
                             marginLeft: 'auto',
                             padding: '4px 8px',
                             background: 'transparent',
-                            border: '1px solid theme === 'dark' ? '#4a4a4a' : '#e2e8f0',
+                            border: '1px solid #4a4a4a',
                             borderRadius: 4,
                             fontSize: '12px',
-                            color: theme === 'dark' ? '#9ca3af' : '#64748b',
+                            color: '#64748b',
                             cursor: 'pointer',
                             lineHeight: 1,
                           }}
@@ -770,7 +770,7 @@ return (
 
         <section
           style={{
-            background: theme === 'dark' ? '#0f0f23' : 'white',
+            background: '#F5F1E8',
             borderRadius: 12,
             padding: 24,
             marginBottom: 32,
@@ -797,7 +797,7 @@ return (
                     alignItems: 'center',
                     gap: '12px',
                     padding: '8px 0',
-                    borderBottom: '1px solid theme === 'dark' ? '#4a4a4a' : '#f1f5f9',
+                    borderBottom: '1px solid #4a4a4a',
                   }}
                   role="button"
                   tabIndex={0}
@@ -814,13 +814,13 @@ return (
                     {contact.name}
                   </span>
                   <span
-                    style={{ color: theme === 'dark' ? '#9ca3af' : '#64748b', fontSize: '13px' }}
+                    style={{ color: '#64748b', fontSize: '13px' }}
                   >
                     {contact.phone}
                   </span>
                   {contact.note && (
                     <span
-                      style={{ color: theme === 'dark' ? '#9ca3af' : '#64748b', fontSize: '12px', fontStyle: 'italic' }}
+                      style={{ color: '#64748b', fontSize: '12px', fontStyle: 'italic' }}
                     >
                       ({contact.note})
                     </span>
@@ -830,10 +830,10 @@ return (
                       marginLeft: 'auto',
                       padding: '4px 8px',
                       background: 'transparent',
-                      border: '1px solid theme === 'dark' ? '#4a4a4a' : '#e2e8f0',
+                      border: '1px solid #4a4a4a',
                       borderRadius: 4,
                       fontSize: '12px',
-                      color: theme === 'dark' ? '#9ca3af' : '#64748b',
+                      color: '#64748b',
                       cursor: 'pointer',
                       lineHeight: 1,
                     }}
@@ -938,7 +938,7 @@ return (
 
         <section
           style={{
-            background: theme === 'dark' ? '#0f0f23' : 'white',
+            background: '#F5F1E8',
             borderRadius: 12,
             padding: 24,
             boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
@@ -1094,9 +1094,9 @@ return (
                   onClick={() => setShowDeleteConfirm(false)}
                   style={{
                     padding: '8px 16px',
-                    background: theme === 'dark' ? '#0f0f23' : 'white',
-                    color: theme === 'dark' ? '#9ca3af' : '#1e293b',
-                    border: '1px solid theme === 'dark' ? '#4a4a4a' : '#e2e8f0',
+                    background: '#F5F1E8',
+                    color: '#1e293b',
+                    border: '1px solid #4a4a4a',
                     borderRadius: 6,
                     fontSize: '14px',
                     cursor: 'pointer',
